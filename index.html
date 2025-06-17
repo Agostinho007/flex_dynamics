@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flex Dynamics - Soluções de TI Modernas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="assets/imgs/Flex Dynamics fv.svg" type="image/x-icon">
+  <script src="https://unpkg.com/heroicons@2.0.13/dist/heroicons.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .bg-hero {
+      background-image: linear-gradient(rgba(26, 26, 26, 0.85), rgba(26, 26, 26, 0.85)), url('https://images.unsplash.com/photo-1516321310767-0a85c5e98f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 30;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    #mobile-menu {
+      display: none;
+    }
+    #mobile-menu.open {
+      display: flex;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary-gold': '#D4AF37',
+            'primary-black': '#1A1A1A',
+            'neutral-white': '#FFFFFF',
+            'neutral-gray': '#333333',
+          },
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-neutral-white">
+  <header id="header" class="bg-primary-black/90 backdrop-blur-md text-neutral-white fixed w-full top-0 z-20 shadow-lg transition-all duration-300">
+    <nav class="container mx-auto flex justify-between items-center py-4 px-4 sm:px-6">
+      <div class="flex items-center">
+        <img src="assets/imgs/Flex Dynamics Logo.svg" alt="Flex Dynamics Logo" class="w-8 h-8 sm:w-10 sm:h-10 mr-2 object-contain">
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight hidden md:block">Flex Dynamics</h1>
+      </div>
+      <div class="hidden md:flex space-x-8 text-sm font-semibold">
+        <a href="#home" class="hover:text-primary-gold transition-colors duration-200">Home</a>
+        <a href="#sobre" class="hover:text-primary-gold transition-colors duration-200">Sobre</a>
+        <a href="#servicos" class="hover:text-primary-gold transition-colors duration-200">Serviços</a>
+        <a href="#portfolio" class="hover:text-primary-gold transition-colors duration-200">Portfólio</a>
+        <a href="#depoimentos" class="hover:text-primary-gold transition-colors duration-200">Depoimentos</a>
+        <a href="#contato" class="hover:text-primary-gold transition-colors duration-200">Contato</a>
+      </div>
+      <button id="menu-toggle" class="md:hidden text-neutral-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="md:hidden bg-primary-black text-neutral-white flex-col items-center py-4 px-4 hidden">
+      <a href="#home" class="block py-2 text-sm font-semibold hover:text-primary-gold transition-colors duration-200">Home</a>
+      <a href="#sobre" class="block py-2 text-sm font-semibold hover:text-primary-gold transition-colors duration-200">Sobre</a>
+      <a href="#servicos" class="block py-2 text-sm font-semibold hover:text-primary-gold transition-colors duration-200">Serviços</a>
+      <a href="#portfolio" class="block py-2 text-sm font-semibold hover:text-primary-gold transition-colors duration-200">Portfólio</a>
+      <a href="#depoimentos" class="block py-2 text-sm font-semibold hover:text-primary-gold transition-colors duration-200">Depoimentos</a>
+      <a href="#contato" class="block py-2 text-sm font-semibold hover:text-primary-gold transition-colors duration-200">Contato</a>
+    </div>
+  </header>
+
+  <a href="https://wa.me/551112345678" target="_blank" class="whatsapp-float">
+    <svg class="w-12 h-12 sm:w-16 sm:h-16 text-primary-gold" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.669.15-.198.297-.767.966-.94 1.164-.174.198-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.019-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.371-.025-.52-.074-.149-.669-.669-1.136-.986-.44-.297-.846-.348-.924-.149-.078.297-.307.884-.66 1.934-.347 1.036-.396 1.88-.148 2.177.248.297 1.087 1.586 2.416 2.805.894.81 1.594 1.287 2.162 1.656.566.368 1.085.517 1.632.517.546 0 1.632-.297 1.879-.644.248-.347.248-.644.173-.842-.074-.198-.446-.347-.893-.496zM12 1.5C6.201 1.5 1.5 6.201 1.5 12c0 1.858.496 3.604 1.356 5.126L1.5 22.5l5.423-1.356A10.416 10.416 0 0012 22.5c5.799 0 10.5-4.701 10.5-10.5S17.799 1.5 12 1.5z"/>
+    </svg>
+  </a>
+
+  <section id="home" class="min-h-screen flex items-center justify-center bg-hero text-neutral-white pt-16 sm:pt-20">
+    <div class="container mx-auto text-center px-4 sm:px-6">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 animate-on-scroll">Inovação em TI com a Flex Dynamics</h2>
+      <p class="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-xl sm:max-w-2xl mx-auto animate-on-scroll">Soluções tecnológicas que impulsionam seu negócio com elegância e eficiência.</p>
+      <a href="#contato" class="bg-primary-gold text-primary-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-yellow-600 hover:scale-105 transition-all duration-300 shadow-lg animate-on-scroll">Fale Conosco</a>
+    </div>
+  </section>
+
+  <section id="sobre" class="py-16 sm:py-20 bg-neutral-gray">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row items-center gap-6 sm:gap-8 animate-on-scroll">
+        <div class="md:w-1/2">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-white mb-4">Sobre a Flex Dynamics</h2>
+          <p class="text-neutral-white text-sm sm:text-base md:text-lg leading-relaxed">
+            A Flex Dynamics é líder em soluções de TI, oferecendo inovação e resultados com um toque de sofisticação. Nossa equipe especializada transforma desafios em oportunidades, entregando tecnologia de ponta para o seu sucesso.
+          </p>
+        </div>
+        <div class="md:w-1/2">
+          <svg class="w-12 h-12 sm:w-16 sm:h-16 text-primary-gold mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos" class="py-16 sm:py-20 bg-neutral-white">
+    <div class="container mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-black mb-6 sm:mb-8 text-center animate-on-scroll">Nossos Serviços</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+        <div class="bg-neutral-gray p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-primary-gold animate-on-scroll">
+          <svg class="w-8 h-8 sm:w-10 sm:h-10 text-primary-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <h3 class="text-lg sm:text-xl font-semibold text-neutral-white mb-2">Desenvolvimento de Software</h3>
+          <p class="text-neutral-white text-sm sm:text-base">Soluções personalizadas para otimizar seus processos.</p>
+        </div>
+        <div class="bg-neutral-gray p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-primary-gold animate-on-scroll">
+          <svg class="w-8 h-8 sm:w-10 sm:h-10 text-primary-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <h3 class="text-lg sm:text-xl font-semibold text-neutral-white mb-2">Segurança de TI</h3>
+          <p class="text-neutral-white text-sm sm:text-base">Proteção robusta contra ameaças digitais.</p>
+        </div>
+        <div class="bg-neutral-gray p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-primary-gold animate-on-scroll">
+          <svg class="w-8 h-8 sm:w-10 sm:h-10 text-primary-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a4 4 0 004-4m-4-8l4-4m0 0l-4 4m4-4H7a4 4 0 00-4 4" />
+          </svg>
+          <h3 class="text-lg sm:text-xl font-semibold text-neutral-white mb-2">Soluções em Nuvem</h3>
+          <p class="text-neutral-white text-sm sm:text-base">Infraestrutura escalável e segura para seu negócio.</p>
+        </div>
+        <div class="bg-neutral-gray p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-primary-gold animate-on-scroll">
+          <svg class="w-8 h-8 sm:w-10 sm:h-10 text-primary-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h3 class="text-lg sm:text-xl font-semibold text-neutral-white mb-2">Consultoria de TI</h3>
+          <p class="text-neutral-white text-sm sm:text-base">Estratégias personalizadas para maximizar sua eficiência.</p>
+        </div>
+        <div class="bg-neutral-gray p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-primary-gold animate-on-scroll">
+          <svg class="w-8 h-8 sm:w-10 sm:h-10 text-primary-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <h3 class="text-lg sm:text-xl font-semibold text-neutral-white mb-2">Suporte Técnico</h3>
+          <p class="text-neutral-white text-sm sm:text-base">Assistência contínua para manter seus sistemas operando.</p>
+        </div>
+        <div class="bg-neutral-gray p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-primary-gold animate-on-scroll">
+          <svg class="w-8 h-8 sm:w-10 sm:h-10 text-primary-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+          <h3 class="text-lg sm:text-xl font-semibold text-neutral-white mb-2">Transformação Digital</h3>
+          <p class="text-neutral-white text-sm sm:text-base">Modernize sua empresa com tecnologias inovadoras.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio" class="py-16 sm:py-20 bg-neutral-gray">
+    <div class="container mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-white mb-6 sm:mb-8 text-center animate-on-scroll">Nosso Portfólio</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+        <div class="bg-neutral-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 animate-on-scroll">
+          <div class="relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1516321310767-0a85c5e98f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sistema ERP" class="w-full h-40 sm:h-48 object-cover transform hover:scale-105 transition-transform duration-300">
+          </div>
+          <div class="p-4 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-semibold text-primary-black mb-2">Sistema ERP</h3>
+            <p class="text-primary-black text-sm sm:text-base">Sistema integrado para gestão empresarial eficiente.</p>
+          </div>
+        </div>
+        <div class="bg-neutral-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 animate-on-scroll">
+          <div class="relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="App Mobile" class="w-full h-40 sm:h-48 object-cover transform hover:scale-105 transition-transform duration-300">
+          </div>
+          <div class="p-4 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-semibold text-primary-black mb-2">App Mobile</h3>
+            <p class="text-primary-black text-sm sm:text-base">Aplicativo para gestão de tarefas em tempo real.</p>
+          </div>
+        </div>
+        <div class="bg-neutral-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 animate-on-scroll">
+          <div class="relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1556740714-5a5a766a6e65?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Plataforma Web" class="w-full h-40 sm:h-48 object-cover transform hover:scale-105 transition-transform duration-300">
+          </div>
+          <div class="p-4 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-semibold text-primary-black mb-2">Plataforma Web</h3>
+            <p class="text-primary-black text-sm sm:text-base">Solução de e-commerce com design moderno.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos" class="py-16 sm:py-20 bg-neutral-white">
+    <div class="container mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-black mb-6 sm:mb-8 text-center animate-on-scroll">O Que Nossos Clientes Dizem</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+        <div class="bg-neutral-gray p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 animate-on-scroll">
+          <p class="text-neutral-white text-sm sm:text-base italic mb-4">"A Flex Dynamics transformou nossa operação com um sistema ERP incrivelmente eficiente."</p>
+          <p class="text-primary-gold font-semibold text-sm sm:text-base">Ana Silva, CEO da TechCorp</p>
+        </div>
+        <div class="bg-neutral-gray p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 animate-on-scroll">
+          <p class="text-neutral-white text-sm sm:text-base italic mb-4">"O suporte técnico da Flex Dynamics é impecável, sempre resolvendo nossos problemas rapidamente."</p>
+          <p class="text-primary-gold font-semibold text-sm sm:text-base">João Mendes, Diretor da Innovate</p>
+        </div>
+        <div class="bg-neutral-gray p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 animate-on-scroll">
+          <p class="text-neutral-white text-sm sm:text-base italic mb-4">"A consultoria de TI nos ajudou a dar um salto na transformação digital."</p>
+          <p class="text-primary-gold font-semibold text-sm sm:text-base">Maria Oliveira, Gerente da DigitalNow</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="py-16 sm:py-20 bg-neutral-gray">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-center mb-6 sm:mb-8 animate-on-scroll">
+        <svg class="w-8 h-8 sm:w-10 sm:h-10 text-primary-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l9-5 9 5v11a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
+        </svg>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-white text-center">Fale Conosco</h2>
+      </div>
+      <div class="max-w-md sm:max-w-lg mx-auto bg-neutral-white p-6 sm:p-8 rounded-xl shadow-md animate-on-scroll">
+        <div class="mb-4 sm:mb-6">
+          <label class="block text-primary-black font-semibold mb-2 text-sm sm:text-base" for="nome">Nome</label>
+          <input type="text" id="nome" class="w-full p-2 sm:p-3 border border-primary-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-gold" placeholder="Seu nome">
+          <p class="text-red-500 text-xs sm:text-sm mt-1 hidden error-message">Por favor, insira seu nome.</p>
+        </div>
+        <div class="mb-4 sm:mb-6">
+          <label class="block text-primary-black font-semibold mb-2 text-sm sm:text-base" for="email">Email</label>
+          <input type="email" id="email" class="w-full p-2 sm:p-3 border border-primary-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-gold" placeholder="Seu email">
+          <p class="text-red-500 text-xs sm:text-sm mt-1 hidden error-message">Por favor, insira um email válido.</p>
+        </div>
+        <div class="mb-4 sm:mb-6">
+          <label class="block text-primary-black font-semibold mb-2 text-sm sm:text-base" for="mensagem">Mensagem</label>
+          <textarea id="mensagem" class="w-full p-2 sm:p-3 border border-primary-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-gold" rows="4 sm:rows-5" placeholder="Sua mensagem"></textarea>
+          <p class="text-red-500 text-xs sm:text-sm mt-1 hidden error-message">Por favor, insira uma mensagem.</p>
+        </div>
+        <button id="enviar-btn" class="bg-primary-gold text-primary-black px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-yellow-600 hover:scale-105 transition-all duration-300 w-full shadow-md">Enviar Mensagem</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-primary-black text-neutral-white py-8 sm:py-12">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold mb-4">Flex Dynamics</h3>
+          <p class="text-xs sm:text-sm text-neutral-white/80">
+            Líder em soluções de TI, oferecendo inovação, eficiência e sofisticação para transformar seu negócio.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold mb-4">Navegação</h3>
+          <ul class="space-y-2 text-xs sm:text-sm">
+            <li><a href="#home" class="hover:text-primary-gold transition-colors duration-200">Home</a></li>
+            <li><a href="#sobre" class="hover:text-primary-gold transition-colors duration-200">Sobre</a></li>
+            <li><a href="#servicos" class="hover:text-primary-gold transition-colors duration-200">Serviços</a></li>
+            <li><a href="#portfolio" class="hover:text-primary-gold transition-colors duration-200">Portfólio</a></li>
+            <li><a href="#depoimentos" class="hover:text-primary-gold transition-colors duration-200">Depoimentos</a></li>
+            <li><a href="#contato" class="hover:text-primary-gold transition-colors duration-200">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold mb-4">Contato</h3>
+          <ul class="space-y-2 text-xs sm:text-sm">
+            <li><span class="text-neutral-white/80">Telefone:</span> +55 (11) 1234-5678</li>
+            <li><span class="text-neutral-white/80">Email:</span> contato@flexdynamics.com</li>
+            <li><span class="text-neutral-white/80">Endereço:</span> Av. Inovação, 123, São Paulo, SP</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold mb-4">Siga-nos</h3>
+          <div class="flex space-x-4">
+            <a href="https://instagram.com" target="_blank" class="text-xl sm:text-2xl hover:text-primary-gold transition-colors duration-200">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2m2.5 2.5h.01M16 3h.01M12 9a3 3 0 100 6 3 3 0 000-6zm0 0a6 6 0 016 6 6 6 0 01-6 6 6 6 0 01-6-6 6 6 0 016-6z" />
+              </svg>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="text-xl sm:text-2xl hover:text-primary-gold transition-colors duration-200">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+              </svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="text-xl sm:text-2xl hover:text-primary-gold transition-colors duration-200">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                <circle cx="4" cy="4" r="2" stroke="none" />
+              </svg>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="text-xl sm:text-2xl hover:text-primary-gold transition-colors duration-200">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 sm:mt-8 border-t border-neutral-white/20 pt-4 text-center">
+        <p class="text-xs sm:text-sm">© 2025 Flex Dynamics. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth' });
+        if (window.innerWidth < 768) {
+          mobileMenu.classList.remove('open');
+          menuToggle.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>';
+        }
+      });
+    });
+
+    // Header transparency on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('bg-primary-black');
+        header.classList.remove('bg-primary-black/90');
+      } else {
+        header.classList.add('bg-primary-black/90');
+        header.classList.remove('bg-primary-black');
+      }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      if (mobileMenu.classList.contains('open')) {
+        menuToggle.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+      } else {
+        menuToggle.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>';
+      }
+    });
+
+    // Scroll animations
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    animateElements.forEach(element => observer.observe(element));
+
+    // Form validation
+    const formButton = document.getElementById('enviar-btn');
+    formButton.addEventListener('click', () => {
+      const nome = document.getElementById('nome');
+      const email = document.getElementById('email');
+      const mensagem = document.getElementById('mensagem');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      function showError(input, message) {
+        const error = input.nextElementSibling;
+        error.classList.remove('hidden');
+        input.classList.add('border-red-500');
+      }
+
+      function clearError(input) {
+        const error = input.nextElementSibling;
+        error.classList.add('hidden');
+        input.classList.remove('border-red-500');
+      }
+
+      [nome, email, mensagem].forEach(input => clearError(input));
+
+      let hasError = false;
+      if (!nome.value.trim()) {
+        showError(nome, 'Por favor, insira seu nome.');
+        hasError = true;
+      }
+      if (!email.value.trim() || !emailRegex.test(email.value)) {
+        showError(email, 'Por favor, insira um email válido.');
+        hasError = true;
+      }
+      if (!mensagem.value.trim()) {
+        showError(mensagem, 'Por favor, insira uma mensagem.');
+        hasError = true;
+      }
+
+      if (!hasError) {
+        alert('Formulário validado! (Simulação, sem envio real)');
+      }
+    });
+  </script>
+</body>
+</html>
